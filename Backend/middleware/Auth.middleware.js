@@ -1,13 +1,18 @@
+import expressAsyncHandler from 'express-async-handler'
 import jwt from 'jsonwebtoken'
 
-const ProtectRoutes=async((req,res,next)=>{
-  const token=req.header('Authorization')
-  if(token){
-    return res.status(404).json({ error: 'Access denied' })
+export const ProtectRoutes=expressAsyncHandler(async(req,res,next)=>{
+  const token = req.cookies?.token; 
+
+  if (!token) {
+    return res.status(401).json({ error: "Access denied, no token provided" });
   }
+
+ 
   try {
     const decoded=jwt.verify(token,process.env.JWT_SECRET)
-     req.userId = decoded.userId;
+        
+         req.user = { id: decoded.id };
      next()
   } catch (error) {
     res.status(401).json({ error: 'Invalid token' });
