@@ -19,20 +19,11 @@ const Register = () => {
     
     if (!formData.username.trim()) {
       newErrors.username = 'Username is required';
-    } else if (formData.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
+    } 
+   
 
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
     }
 
     if (formData.password !== formData.confirmPassword) {
@@ -68,8 +59,10 @@ const Register = () => {
       
     } catch (error) {
       setErrors({ submit: error.message || 'Registration failed. Please try again.' });
+
     } finally {
       setIsLoading(false);
+     
     }
   };
 
