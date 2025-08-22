@@ -111,6 +111,7 @@ export const getSharedPrompt = expressAsyncHandler(async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
 export const updatePrompt = expressAsyncHandler(async (req, res) => {
   try {
     const { title, content, format, vaultType, category } = req.body;

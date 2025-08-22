@@ -4,7 +4,10 @@ import {
   getPrompt,
   deletePrompt,
   sharePrompt,
-  getSharedPrompt
+  getSharedPrompt,
+  updatePrompt,
+  togglePublic,
+  toggleFavorite
 } from '../controller/Post.controller.js';
 import ProtectRoutes  from '../middleware/Auth.middleware.js';
 
@@ -17,9 +20,13 @@ router.route('/')
 
 router.route('/:id')
   .delete(ProtectRoutes, deletePrompt); // Delete prompt
+router.put('/:id', ProtectRoutes, updatePrompt);
+router.patch('/:id/toggle-public', ProtectRoutes, togglePublic);
 
 router.route('/:id/share')
   .post(ProtectRoutes, sharePrompt);   // Generate share link
+// Route to toggle the favorite status of a specific prompt by ID
+router.patch('/:id/toggle-favorite', ProtectRoutes, toggleFavorite);
 
 // Public route (no authentication needed)
 router.route('/shared/:token')
@@ -27,3 +34,5 @@ router.route('/shared/:token')
 
 
 export default router;
+
+

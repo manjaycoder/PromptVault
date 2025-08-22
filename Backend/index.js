@@ -16,10 +16,10 @@ connectDb()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
-const PORT=process.env.PORT||  3000
+
 app.use('/Auth',Auth)
 app.use("/api/export",Export)
 app.use('/Post',Post)
-app.listen(PORT,()=>{
+app.listen(()=>{
   console.log("Server is running")
 })
